@@ -7,7 +7,7 @@ const createUser = async (req, res, next) => {
     .cookie("refreshToken", result.refreshToken, {
       httpOnly: true,
       secure: true,
-      sameSite: "lax",
+      sameSite: "none",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     })
     .status(StatusCode.CREATED)
@@ -26,7 +26,7 @@ const login = async (req, res, next) => {
     .cookie("refreshToken", result.refreshToken, {
       httpOnly: true,
       secure: false,
-      sameSite: "lax",
+      sameSite: "none",
       maxAge: 7 * 24 * 60 * 60 * 1000,
     })
     .status(StatusCode.OK)
