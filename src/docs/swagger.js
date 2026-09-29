@@ -1,8 +1,10 @@
 const swaggerJsDoc = require("swagger-jsdoc");
+const path = require("path");
 
 const options = {
   definition: {
     openapi: "3.0.0",
+
     info: {
       title: "E-Commerce API",
       version: "1.0.0",
@@ -11,26 +13,28 @@ const options = {
 
     servers: [
       {
-        url: "http://localhost:5000",
+        url: "https://back-end-e-commerce.vercel.app",
       },
     ],
 
-components: {
-  securitySchemes: {
-    bearerAuth: {
-      type: "http",
-      scheme: "bearer",
-      bearerFormat: "JWT",
+    components: {
+      securitySchemes: {
+        bearerAuth: {
+          type: "http",
+          scheme: "bearer",
+          bearerFormat: "JWT",
+        },
+
+        refreshCookie: {
+          type: "apiKey",
+          in: "cookie",
+          name: "refreshToken",
+        },
+      },
     },
-    refreshCookie: {
-      type: "apiKey",
-      in: "cookie",
-      name: "refreshToken",
-    },
-  },
-},
   },
 
-  apis: ["./src/docs/*.js"],
+  apis: [path.join(__dirname, "*.js")],
 };
+
 module.exports = swaggerJsDoc(options);
